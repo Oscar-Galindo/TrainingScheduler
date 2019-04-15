@@ -1,30 +1,48 @@
-import { Component } from '@angular/core';
-
+import { Component } from "@angular/core";
+import { AuthService } from "./auth.service";
+import { Route, Router } from "@angular/router";
 
 @Component({
-    templateUrl: './sign-up.component.html',
+  templateUrl: "./sign-up.component.html"
 })
 export class SignUpComponent {
-    firstName = '';
-    lastName = '';
-    email = '';
-    password = '';
+  firstName = "";
+  lastName = "";
+  email = "";
+  password = "";
+  phoneNumber = "";
 
-    constructor() { }
+  constructor(private authService: AuthService, private router: Router) {}
 
-    signUp(): void{
-        const newUser = {
-            firstName:this.firstName,
-            lastName:this.lastName,
-            email:this.email,
-            password:this.password,
-        };
+  signUp(): void {
+    const newUser = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.email,
+      password: this.password,
+      phoneNumber: this.phoneNumber
+    };
 
-        if (newUser.firstName && newUser.lastName && newUser.email && newUser.password)
-            {console.log(newUser);
-            }else{
-                console.log('broken form, not valid YO')
-            }
+    if (
+      newUser.firstName &&
+      newUser.lastName &&
+      newUser.email &&
+      newUser.password &&
+      newUser.phoneNumber
+    ) {
+      this.authService
+        .signup(
+          newUser.firstName,
+          newUser.lastName,
+          newUser.email,
+          newUser.password,
+          newUser.phoneNumber
+        )
+        .subscribe(response => {
+          this.router.navigateByUrl("/login");
+        });
+    } else {
+      console.log("Invalid");
     }
-
+  }
 }

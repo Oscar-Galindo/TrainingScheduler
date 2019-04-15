@@ -3,7 +3,7 @@ const validator = require('validator');
 
 const create = async function (req, res) {
   res.setHeader('ContentType', 'application/json');
-  const body = req.body;
+  const body = req.body; //Post Request
 
   if (!body.email) {
     return ReE(res, 'Please enter an email to register', 422);

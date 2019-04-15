@@ -8,7 +8,16 @@ module.exports = {
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      role: {
+      eventName: {
+        type: Sequelize.STRING
+      },
+      eventDate: {
+        type: Sequelize.DATE
+      },
+      eventTime: {
+        type: Sequelize.DATE
+      },
+      eventLocation: {
         type: Sequelize.STRING
       },
       createdAt: {
